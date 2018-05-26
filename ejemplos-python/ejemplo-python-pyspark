@@ -1,0 +1,16 @@
+pyspark
+RDDread = sc.textFile("file:///home/master/texto")
+RDDread.collect()
+RDDread.first()
+RDDread.count()
++
+#PySpark --jars
+pyspark --jars /home/master/mysql-connector-java-5.1.46.jar
+dataframe_mysql = sqlContext.read.format("jdbc").options( url="jdbc:mysql://localhost:3306/spark",driver = "com.mysql.jdbc.Driver",dbtable = "clientes",user="spark", password="spark").load()
+dataframe_mysql.show()
+#Machine Learning
+rdd1 = spark.sparkContext.parallelize([('a',7),('a',2),('b',2)])
+rdd2 = spark.sparkContext.parallelize([("a",["x","y","z"]), ("b",["p", "r"])])
+rdd3 = spark.sparkContext.parallelize(range(100))
+rdd1.reduce(lambda a,b: a+b)
+rdd2.flatMapValues(lambda x: x).collect()
